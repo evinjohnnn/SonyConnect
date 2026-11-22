@@ -1,6 +1,6 @@
 # Notices
 
-Sony Companion is free software: you can redistribute it and/or modify it
+Sound Connect is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free
 Software Foundation, either version 3 of the License, or (at your option) any
 later version. See [LICENSE](LICENSE).
@@ -9,7 +9,11 @@ later version. See [LICENSE](LICENSE).
 
 Sony, WH-1000XM6 and related product names are trademarks of Sony Group
 Corporation. This project is not affiliated with, endorsed by or sponsored by
-Sony. The names are used only to identify compatible hardware.
+Sony. The names are used only to identify compatible hardware. This project
+is not Sony's "Sound Connect" app.
+
+The Sound Connect logo and icons in `brand/` are original work, released
+under the same licence as the code.
 
 ## Acknowledgements
 

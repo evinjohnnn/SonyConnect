@@ -72,12 +72,12 @@ struct MenuBarPanel: View {
                     openWindow(id: "main")
                 }
             } else {
-                MenuItem("Open Sony Companion…") {
+                MenuItem("Open Sound Connect…") {
                     NSApp.activate()
                     openWindow(id: "main")
                 }
             }
-            MenuItem("Quit Sony Companion", shortcut: "⌘Q") { NSApp.terminate(nil) }
+            MenuItem("Quit Sound Connect", shortcut: "⌘Q") { NSApp.terminate(nil) }
                 .keyboardShortcut("q")
         }
         .padding(.bottom, 5)

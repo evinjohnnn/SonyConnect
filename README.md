@@ -1,4 +1,11 @@
-# Sony Companion
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="brand/soundconnect/png/soundconnect-lockup-horizontal-on-dark-1600.png">
+    <img alt="Sound Connect" src="brand/soundconnect/png/soundconnect-lockup-horizontal-1600.png" width="560">
+  </picture>
+</p>
+
+# Sound Connect
 
 An independent, open-source companion app for Sony headphones on macOS, with
 iOS, Android and Windows versions in progress. It talks to the headphones
@@ -6,10 +13,11 @@ directly over Bluetooth, using the same control channel as Sony's own app, so
 noise cancelling, the equaliser, battery and other settings work from your
 computer.
 
-> **Not affiliated with Sony.** Sony, WH-1000XM6 and related names are
-> trademarks of Sony Group Corporation, used here only to say which headphones
-> this works with. This project contains no Sony code, images, fonts or
-> credentials.
+> **Not affiliated with Sony.** This is not Sony's Sound Connect app and is
+> not made, endorsed or supported by Sony. Sony, WH-1000XM6 and related names
+> are trademarks of Sony Group Corporation, used here only to say which
+> headphones this works with. This project contains no Sony code, images,
+> fonts or credentials.
 
 ## What works
 
@@ -44,6 +52,7 @@ core/                      Rust protocol engine (no I/O, no threads)
 apps/macos/SonyCompanion/  Swift package: MDRKit, sonyctl, the macOS app
 apps/ios/SonyCompanion/    iOS app (XcodeGen project)
 apps/flutter/              Flutter app for Android and Windows
+brand/soundconnect/        Logo, icons and the usage guide
 scripts/                   Build scripts
 ```
 
@@ -57,7 +66,8 @@ Needs Rust and Xcode.
 ```
 
 The script builds the Rust core first, then the Swift package that links it.
-The app is `apps/macos/SonyCompanion/.build/out/Products/<Debug|Release>/SonyCompanionApp`.
+The app is `apps/macos/SonyCompanion/.build/out/Products/<Debug|Release>/SonyCompanionApp`;
+it shows up as Sound Connect in the Dock and the menu bar.
 
 iOS (simulator):
 

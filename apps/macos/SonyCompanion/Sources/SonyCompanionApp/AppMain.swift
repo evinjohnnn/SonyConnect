@@ -32,6 +32,10 @@ struct SonyCompanionApp: App {
         // SwiftPM executables start as accessory apps; make the window behave
         // like a normal app (Dock icon, focusable, Cmd-Tab).
         NSApplication.shared.setActivationPolicy(.regular)
+        // Without an app bundle there is no icon file for the Dock to find.
+        if let icon = Bundle.module.image(forResource: "AppIcon") {
+            NSApplication.shared.applicationIconImage = icon
+        }
 
         // The app follows the system appearance. Design-review aid:
         // `SONY_UI_APPEARANCE=light|dark` forces one without changing it.
@@ -46,7 +50,7 @@ struct SonyCompanionApp: App {
     var body: some Scene {
         // One main window: the menu bar panel's "Settings…" brings it
         // forward instead of opening another copy.
-        Window("Sony Companion", id: "main") {
+        Window("Sound Connect", id: "main") {
             ContentView()
                 .environmentObject(session)
                 .environmentObject(ui)
@@ -95,19 +99,22 @@ struct SonyCompanionApp: App {
                 .environmentObject(session)
                 .environmentObject(ui)
         } label: {
-            Image(systemName: menuBarSymbol)
+            Image(nsImage: Self.menuBarIcon)
+                .accessibilityLabel("Sound Connect")
         }
         .menuBarExtraStyle(.window)
     }
 
-    private var menuBarSymbol: String {
-        guard session.connected != nil else { return "headphones" }
-        switch session.status.noiseControl {
-        case .noiseCancelling: return NoiseControlChoice.noiseCancelling.uiSymbol
-        case .ambient: return NoiseControlChoice.ambient.uiSymbol
-        default: return "headphones"
-        }
-    }
+    /// The app's symbol as a template image, so the menu bar tints it for
+    /// light and dark menu bars and for the highlighted state.
+    private static let menuBarIcon: NSImage = {
+        let image = Bundle.module.image(forResource: "MenuBarIcon")
+            ?? NSImage(systemSymbolName: "headphones", accessibilityDescription: nil)
+            ?? NSImage()
+        image.size = NSSize(width: 18, height: 18)
+        image.isTemplate = true
+        return image
+    }()
 }
 
 /// The Headphones menu: every control the window offers that a keyboard user

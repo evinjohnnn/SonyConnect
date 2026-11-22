@@ -51,8 +51,15 @@ let package = Package(
             name: "SonyCompanionApp",
             dependencies: ["MDRKit"],
             path: "Sources/SonyCompanionApp",
+            // The app icon and the menu bar icon (a template image).
+            resources: [.process("Resources")],
             linkerSettings: [
                 .linkedFramework("IOBluetooth"),
+                // A plain executable has no bundle; an Info.plist embedded in
+                // the binary gives the menu bar and Dock the app's name.
+                .unsafeFlags(["-Xlinker", "-sectcreate", "-Xlinker", "__TEXT",
+                              "-Xlinker", "__info_plist",
+                              "-Xlinker", packageDir + "/Support/Info.plist"]),
             ]
         ),
     ]

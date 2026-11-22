@@ -1,4 +1,4 @@
-// Sony Companion — Flutter interface for Android and Windows.
+// Sound Connect — Flutter interface for Android and Windows.
 //
 // Shares the Rust engine with the macOS and iOS apps. The visual language is
 // the same: a content layer on system surfaces, and a functional layer of
@@ -444,7 +444,7 @@ class SonyCompanionApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sony Companion',
+      title: 'Sound Connect',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: _theme(Brightness.light),
