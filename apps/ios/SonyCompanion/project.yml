@@ -1,0 +1,63 @@
+name: SonyCompanionIOS
+options:
+  bundleIdPrefix: dev.connect
+  deploymentTarget:
+    iOS: "26.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    # The C engine declarations arrive through the bridging header.
+    HEADER_SEARCH_PATHS: "$(SRCROOT)/../../macos/SonyCompanion/Sources/CSonyMDR/include"
+    SWIFT_OBJC_BRIDGING_HEADER: "$(SRCROOT)/Sources/Bridging-Header.h"
+
+targets:
+  SonyCompanionIOS:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+      # One source of truth for the engine wrapper, shared with macOS.
+      - path: ../../macos/SonyCompanion/Sources/MDRKit/Engine.swift
+      # Shared, original headphone artwork (procedural, no image assets).
+      - path: ../../macos/SonyCompanion/Sources/SonyCompanionApp/HeadphoneArtwork.swift
+      # Shared real-time 3D model (SceneKit, procedural geometry).
+      - path: ../../macos/SonyCompanion/Sources/SonyCompanionApp/Headphone3DView.swift
+    dependencies:
+      - sdk: ExternalAccessory.framework
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.connect.sonycompanion
+        # Link the static archive explicitly. `-lmdr_ffi` picks the cdylib
+        # first, which embeds an absolute build path and fails on device.
+        "OTHER_LDFLAGS[sdk=iphoneos*]":
+          - "$(SRCROOT)/../../../core/target/aarch64-apple-ios/release/libmdr_ffi.a"
+        "OTHER_LDFLAGS[sdk=iphonesimulator*]":
+          - "$(SRCROOT)/../../../core/target/aarch64-apple-ios-sim/release/libmdr_ffi.a"
+        # The Rust engine is built for the Apple-silicon simulator slice; the
+        # x86_64 slice would have no library to link.
+        "EXCLUDED_ARCHS[sdk=iphonesimulator*]": x86_64
+        ONLY_ACTIVE_ARCH: NO
+        TARGETED_DEVICE_FAMILY: "1,2"
+    info:
+      path: Sources/Info.plist
+      properties:
+        CFBundleDisplayName: Sony Companion
+        CFBundleShortVersionString: "0.1.0"
+        CFBundleVersion: "1"
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        # Sony's declared external-accessory protocols, read from the shipped
+        # app's Info.plist. Without these the accessory never appears.
+        UISupportedExternalAccessoryProtocols:
+          - jp.co.sony.songpal.mdr.link
+          - jp.co.sony.songpal.mdr.link2
+          - com.sony.mdr.ar.ext1
+          - com.sony.sca.servicelinkage
+        NSBluetoothAlwaysUsageDescription: >-
+          Sony Companion talks to your headphones over their control channel to
+          read battery and adjust noise cancelling and the equalizer.

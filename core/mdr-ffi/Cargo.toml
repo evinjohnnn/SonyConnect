@@ -1,0 +1,14 @@
+[package]
+name = "mdr-ffi"
+description = "C ABI bindings for the mdr-core Sony MDR engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[lib]
+name = "mdr_ffi"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[dependencies]
+mdr-core = { path = "../mdr-core" }

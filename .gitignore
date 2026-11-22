@@ -1,0 +1,34 @@
+# Build output
+**/.build/
+**/target/
+**/DerivedData/
+*.dSYM/
+*.o
+*.a
+
+# Generated Xcode project (XcodeGen regenerates it from project.yml)
+apps/ios/**/*.xcodeproj
+apps/ios/**/Sources/Info.plist
+
+# Flutter
+/apps/flutter/**/build/
+/apps/flutter/**/.dart_tool/
+/apps/flutter/**/macos/Flutter/ephemeral/
+/apps/flutter/**/windows/flutter/ephemeral/
+/apps/flutter/**/android/.gradle/
+/apps/flutter/sony_companion/android/app/src/main/jniLibs/
+
+# App packages and secrets
+*.apk
+*.apks
+*.aab
+*.ipa
+.env
+.env.*
+*.pem
+*.p12
+*.mobileprovision
+
+# OS
+.DS_Store
+*.log

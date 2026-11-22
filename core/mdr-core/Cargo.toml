@@ -1,0 +1,14 @@
+[package]
+name = "mdr-core"
+description = "Independent, interoperable Sony MDR (V1/V2) control protocol engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[lib]
+name = "mdr_core"
+
+[dependencies]
+
+[dev-dependencies]
