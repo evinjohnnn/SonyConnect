@@ -32,3 +32,6 @@ apps/ios/**/Sources/Info.plist
 # OS
 .DS_Store
 *.log
+
+# Release packages (scripts/package-macos.sh)
+/dist/

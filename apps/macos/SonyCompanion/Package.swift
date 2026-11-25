@@ -5,7 +5,10 @@ import PackageDescription
 // The Rust core is built by scripts/build-macos.sh into core/target/release.
 // Resolve it relative to this manifest so the package stays relocatable.
 let packageDir = URL(fileURLWithPath: #filePath).deletingLastPathComponent().path
-let coreLibDir = packageDir + "/../../../core/target/release"
+// scripts/package-macos.sh points MDR_CORE_LIB_DIR at a universal (arm64 and
+// x86_64) copy of the library when it builds a release for both kinds of Mac.
+let coreLibDir = ProcessInfo.processInfo.environment["MDR_CORE_LIB_DIR"]
+    ?? packageDir + "/../../../core/target/release"
 
 let package = Package(
     name: "SonyCompanion",

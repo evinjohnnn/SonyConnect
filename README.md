@@ -34,6 +34,13 @@ protocol may work; the app only shows settings the headphones report.
 - Paired devices: list, connect, disconnect, pairing mode
 - A menu bar panel on macOS
 
+## Download
+
+Get the macOS app from
+[Releases](https://github.com/evinjohnnn/SonyConnect/releases): open the
+`.dmg` and drag Sound Connect to Applications. It needs macOS 26 and runs on
+Apple silicon and Intel Macs.
+
 ## Platforms
 
 | Platform | State |
@@ -68,6 +75,10 @@ Needs Rust and Xcode.
 The script builds the Rust core first, then the Swift package that links it.
 The app is `apps/macos/SonyCompanion/.build/out/Products/<Debug|Release>/SonyCompanionApp`;
 it shows up as Sound Connect in the Dock and the menu bar.
+
+To make a release build (`dist/Sound Connect.app` and a `.dmg`), run
+`./scripts/package-macos.sh`. The comments at the top of the script cover
+signing and notarisation.
 
 iOS (simulator):
 
